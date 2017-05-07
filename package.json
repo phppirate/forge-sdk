@@ -1,0 +1,12 @@
+{
+  "name": "forge-sdk",
+  "version": "1.0.0",
+  "description": "Unofficial JavaScript SDK for the Laravel Forge Api",
+  "main": "index.js",
+  "repository": "https://github.com/phppirate/forge-sdk",
+  "author": "Sam Podlogar",
+  "license": "MIT",
+  "devDependencies": {
+    "rollup-plugin-babel": "^2.7.1"
+  }
+}
