@@ -1,7 +1,8 @@
 import ForgeReuqest from './forge/ForgeRequest.js';
+import FirewallRule from './forge/FirewallRule.js';
 import Server from './forge/Server.js';
 import Daemon from './forge/Daemon.js';
-import FirewallRule from './forge/FirewallRule.js';
+import Worker from './forge/Worker.js';
 import Site from './forge/Site.js';
 
 
@@ -252,4 +253,31 @@ export default class Forge {
   updateLoadBalancingConfiguration(serverId, siteId, data){
     return this.request.base('POST', `servers/${serverId}/sites/${siteId}/balancing`, data)
   }
+
+
+
+  // ---------------------------------
+  // Sites
+  // ---------------------------------
+
+  workers(serverId, siteId){
+    return this.request.json('GET', `servers/${serverId}/sites/${siteId}/workers`, null, r => r.workers.map(data => new Worker(data)))
+  }
+
+  worker(serverId, siteId, workerId){
+    return this.request.json('GET', `servers/${serverId}/sites/${siteId}/workers/${workerId}`, null, r => new Worker(r.worker))
+  }
+
+  createWorker(serverId, siteId, data){
+    return this.request.json('POST', `servers/${serverId}/sites/${siteId}/workers`, data, r => new Worker(r.worker))
+  }
+
+  deleteWorker(serverId, siteId, workerId){
+    return this.request.base('DELETE', `servers/${serverId}/sites/${siteId}/workers/${workerId}`)
+  }
+
+  restartWorker(serverId, siteId, workerId){
+    return this.request.base('POST', `servers/${serverId}/sites/${siteId}/workers/${workerId}/restart`)
+  }
+
 }

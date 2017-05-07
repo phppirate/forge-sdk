@@ -131,3 +131,16 @@ forge.removeWordPress(serverId, siteId)
 ``` javascript
 forge.updateLoadBalancingConfiguration(serverId, siteId, data)
 ```
+
+### Workers
+
+``` javascript
+forge.workers(serverId, siteId)
+forge.worker(serverId, siteId, workerId)
+forge.createWorker(serverId, siteId, data)
+forge.deleteWorker(serverId, siteId, workerId)
+forge.restartWorker(serverId, siteId, workerId)
+```
+
+
+## Contrubutions are welcome.

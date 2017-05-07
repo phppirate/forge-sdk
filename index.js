@@ -35,6 +35,14 @@ class ForgeRequest {
     }
 }
 
+class FirewallRule {
+    constructor(data) {
+        Object.keys(data).forEach(i => {
+            this[i] = data[i];
+        });
+    }
+}
+
 class Server {
     constructor(data) {
         Object.keys(data).forEach(i => {
@@ -51,7 +59,7 @@ class Daemon {
     }
 }
 
-class FirewallRule {
+class Worker {
     constructor(data) {
         Object.keys(data).forEach(i => {
             this[i] = data[i];
@@ -284,6 +292,31 @@ class Forge {
   updateLoadBalancingConfiguration(serverId, siteId, data) {
     return this.request.base('POST', `servers/${serverId}/sites/${siteId}/balancing`, data);
   }
+
+  // ---------------------------------
+  // Sites
+  // ---------------------------------
+
+  workers(serverId, siteId) {
+    return this.request.json('GET', `servers/${serverId}/sites/${siteId}/workers`, null, r => r.workers.map(data => new Worker(data)));
+  }
+
+  worker(serverId, siteId, workerId) {
+    return this.request.json('GET', `servers/${serverId}/sites/${siteId}/workers/${workerId}`, null, r => new Worker(r.worker));
+  }
+
+  createWorker(serverId, siteId, data) {
+    return this.request.json('POST', `servers/${serverId}/sites/${siteId}/workers`, data, r => new Worker(r.worker));
+  }
+
+  deleteWorker(serverId, siteId, workerId) {
+    return this.request.base('DELETE', `servers/${serverId}/sites/${siteId}/workers/${workerId}`);
+  }
+
+  restartWorker(serverId, siteId, workerId) {
+    return this.request.base('POST', `servers/${serverId}/sites/${siteId}/workers/${workerId}/restart`);
+  }
+
 }
 
 export default Forge;
