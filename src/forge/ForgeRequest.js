@@ -14,7 +14,7 @@ export default class ForgeRequest {
             fetch('https://forge.laravel.com/api/v1/' + path, {
                 method,
                 headers: this.headers,
-                body
+                body: body ? JSON.stringify(body) : null
             })
             .then(r => resolve(callback(r)))
             .catch(err => {

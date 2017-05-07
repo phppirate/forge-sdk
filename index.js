@@ -14,7 +14,7 @@ class ForgeRequest {
             fetch('https://forge.laravel.com/api/v1/' + path, {
                 method,
                 headers: this.headers,
-                body
+                body: body ? JSON.stringify(body) : null
             }).then(r => resolve(callback(r))).catch(err => {
                 console.error(err);
                 reject(err);
@@ -59,7 +59,7 @@ class FirewallRule {
     }
 }
 
-class Server$1 {
+class Site {
     constructor(data) {
         Object.keys(data).forEach(i => {
             this[i] = data[i];
@@ -191,19 +191,19 @@ class Forge {
   // ---------------------------------
 
   sites(serverId) {
-    return this.request.json('GET', `servers/${serverId}/sites`, null, r => r.sites.map(data => new Server$1(data)));
+    return this.request.json('GET', `servers/${serverId}/sites`, null, r => r.sites.map(data => new Site(data)));
   }
 
   site(serverId, siteId) {
-    return this.request.json('GET', `servers/${serverId}/sites/${siteId}`, null, r => new Server$1(r.site));
+    return this.request.json('GET', `servers/${serverId}/sites/${siteId}`, null, r => new Site(r.site));
   }
 
   createSite(serverId, data) {
-    return this.request.json('POST', `servers/${serverId}/sites`, data, r => new Server$1(r.site));
+    return this.request.json('POST', `servers/${serverId}/sites`, data, r => new Site(r.site));
   }
 
   updateSite(serverId, siteId, data) {
-    return this.request.json('PUT', `servers/${serverId}/sites/${siteId}`, data, r => new Server$1(r.site));
+    return this.request.json('PUT', `servers/${serverId}/sites/${siteId}`, data, r => new Site(r.site));
   }
 
   // NOT FOUND IN API DOCS --- @TODO: CHECK OUT FORGE PHP SDK
