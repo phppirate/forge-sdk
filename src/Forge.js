@@ -1,6 +1,8 @@
+import MySQLDatabase from './forge/MySQLDatabase.js';
 import ForgeReuqest from './forge/ForgeRequest.js';
 import FirewallRule from './forge/FirewallRule.js';
 import Certificate from './forge/Certificate.js';
+import MySQLUser from './forge/MySQLUser.js';
 import Server from './forge/Server.js';
 import Daemon from './forge/Daemon.js';
 import Worker from './forge/Worker.js';
@@ -316,6 +318,53 @@ export default class Forge {
 
   obtainLetsEncryptCertificate(serverId, siteId, data){
     return this.request.json('POST', `servers/${serverId}/sites/${siteId}/certificates/letsencrypt`, data, ({certificate}) => new Certificate(certificate))
+  }
+
+
+
+  // ---------------------------------
+  // MySQL
+  // ---------------------------------
+
+  mysqlDatabases(serverId){
+    return this.request.json('GET', `servers/${serverId}/mysql`, data, ({databases}) => databases.map(data => new MySQLDatabase(data)))
+  }
+
+  mysqlDatabase(serverId, databaseId){
+    return this.request.json('GET', `servers/${serverId}/mysql/${databaseId}`, data, ({database}) => new MySQLDatabase(database))
+  }
+
+  createMysqlDatabase(serverId, data){
+    return this.request.json('POST', `servers/${serverId}/mysql`, data, ({database}) => new MySQLDatabase(database))
+  }
+
+  updateMysqlDatabase(serverId, databaseId, data){
+    return this.request.json('PUT', `servers/${serverId}/mysql/${databaseId}`, data, ({database}) => new MySQLDatabase(database))
+  }
+
+  deleteMysqlDatabase(serverId, databaseId){
+    return this.request.base('DELETE', `servers/${serverId}/mysql/${databaseId}`)
+  }
+
+  // Users
+  mysqlUsers(serverId){
+    return this.request.json('GET', `servers/${serverId}/mysql-users`, data, ({users}) => users.map(data => new MySQLUser(data)))
+  }
+
+  mysqlUser(serverId, userId){
+    return this.request.json('GET', `servers/${serverId}/mysql-users/${userId}`, data, ({user}) => new MySQLUser(user))
+  }
+
+  createMysqlUser(serverId, data){
+    return this.request.json('POST', `servers/${serverId}/mysql-users`, data, ({user}) => new MySQLUser(user))
+  }
+
+  updateMysqlUser(serverId, userId, data){
+    return this.request.json('PUT', `servers/${serverId}/mysql-users/${userId}`, data, ({user}) => new MySQLUser(user))
+  }
+
+  deleteMysqlUser(serverId, userId){
+    return this.request.base('DELETE', `servers/${serverId}/mysql-users/${userId}`)
   }
 
 }

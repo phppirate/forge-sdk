@@ -155,4 +155,22 @@ forge.activateCertificate(serverId, siteId, certificateId)
 forge.obtainLetsEncryptCertificate(serverId, siteId, data)
 ```
 
+### MySQL
+``` javascript
+forge.mysqlDatabases(serverId)
+forge.mysqlDatabase(serverId, databaseId)
+forge.createMysqlDatabase(serverId, data)
+forge.updateMysqlDatabase(serverId, databaseId, data)
+forge.deleteMysqlDatabase(serverId, databaseId)
+```
+
+#### Users
+``` javascript
+forge.mysqlUsers(serverId)
+forge.mysqlUser(serverId, userId)
+forge.createMysqlUser(serverId, data)
+forge.updateMysqlUser(serverId, userId, data)
+forge.deleteMysqlUser(serverId, userId)
+```
+
 ## Contrubutions are welcome.
