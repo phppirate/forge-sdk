@@ -90,56 +90,43 @@ forge.deleteFirewallRule(serverId, ruleId)
 ### Sites
 
 ``` javascript
-sites(serverId)
-
-site(serverId, siteId)
-
-createSite(serverId, data)
-
-updateSite(serverId, siteId, data)
+forge.sites(serverId)
+forge.site(serverId, siteId)
+forge.createSite(serverId, data)
+forge.updateSite(serverId, siteId, data)
 
 // NOT FOUND IN API DOCS --- @TODO: CHECK OUT FORGE PHP SDK
 // refreshSiteToken(serverId, siteId){}
 
-deleteSite(serverId, siteId)
+forge.deleteSite(serverId, siteId)
 ```
 
 #### Environment File
 ``` javascript
-siteEnvironmentFile(serverId, siteId)
-
-updateSiteEnvironmentFile(serverId, siteId, content)
+forge.siteEnvironmentFile(serverId, siteId)
+forge.updateSiteEnvironmentFile(serverId, siteId, content)
 ```
 
 #### Site Repositories and Deployments
 ``` javascript
-installGitRepositoryOnSite(serverId, siteId, data)
-
-destroySiteGitRepository(serverId, siteId)
-
-siteDeploymentScript(serverId, siteId)
-
-updateSiteDeploymentScript(serverId, siteId, content)
-
-enableQuickDeploy(serverId, siteId)
-
-disableQuickDeploy(serverId, siteId)
-
-deploySite(serverId, siteId)
-
-resetDeploymentState(serverId, siteId)
-
-siteDeploymentLog(serverId, siteId)
+forge.installGitRepositoryOnSite(serverId, siteId, data)
+forge.destroySiteGitRepository(serverId, siteId)
+forge.siteDeploymentScript(serverId, siteId)
+forge.updateSiteDeploymentScript(serverId, siteId, content)
+forge.enableQuickDeploy(serverId, siteId)
+forge.disableQuickDeploy(serverId, siteId)
+forge.deploySite(serverId, siteId)
+forge.resetDeploymentState(serverId, siteId)
+forge.siteDeploymentLog(serverId, siteId)
 ```
 
 #### Installing Wordpress
 ``` javascript
-installWordPress(serverId, siteId, data)
-
-removeWordPress(serverId, siteId)
+forge.installWordPress(serverId, siteId, data)
+forge.removeWordPress(serverId, siteId)
 ```
 
 #### Updating Load balancing Configuration
 ``` javascript
-updateLoadBalancingConfiguration(serverId, siteId, data)
+forge.updateLoadBalancingConfiguration(serverId, siteId, data)
 ```
