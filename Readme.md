@@ -32,6 +32,7 @@ forge.servers()
 ``` javascript
 forge.servers()
 forge.server(serverId)
+forge.rebootServer(serverId)
 ```
 
 ### Services

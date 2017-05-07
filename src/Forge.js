@@ -27,6 +27,10 @@ export default class Forge {
   server(serverId){
     return this.request.json('GET', `servers/${serverId}`, null, r => new Server(r.server))
   }
+  
+  rebootServer(serverId){
+    return this.request.base('POST', `servers/${serverId}/reboot`)
+  }
 
 
 

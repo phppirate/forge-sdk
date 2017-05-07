@@ -1,6 +1,6 @@
 {
   "name": "forge-sdk",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Unofficial JavaScript SDK for the Laravel Forge Api",
   "main": "index.js",
   "repository": "https://github.com/phppirate/forge-sdk",
