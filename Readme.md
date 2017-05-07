@@ -143,4 +143,16 @@ forge.restartWorker(serverId, siteId, workerId)
 ```
 
 
+### SSL Certificates
+``` javascript
+forge.certificates(serverId, siteId)
+forge.certificate(serverId, siteId, certificateId)
+forge.createCertificate(serverId, siteId, data)
+forge.deleteCertificate(serverId, siteId, certificateId)
+forge.getCertificateSigningRequest(serverId, siteId, certificateId)
+forge.installCertificate(serverId, siteId, certificateId)
+forge.activateCertificate(serverId, siteId, certificateId)
+forge.obtainLetsEncryptCertificate(serverId, siteId, data)
+```
+
 ## Contrubutions are welcome.

@@ -43,6 +43,14 @@ class FirewallRule {
     }
 }
 
+class Certificate {
+    constructor(data) {
+        Object.keys(data).forEach(i => {
+            this[i] = data[i];
+        });
+    }
+}
+
 class Server {
     constructor(data) {
         Object.keys(data).forEach(i => {
@@ -294,7 +302,7 @@ class Forge {
   }
 
   // ---------------------------------
-  // Sites
+  // Workers
   // ---------------------------------
 
   workers(serverId, siteId) {
@@ -315,6 +323,41 @@ class Forge {
 
   restartWorker(serverId, siteId, workerId) {
     return this.request.base('POST', `servers/${serverId}/sites/${siteId}/workers/${workerId}/restart`);
+  }
+
+  // ---------------------------------
+  // Site SSL Certificates
+  // ---------------------------------
+  certificates(serverId, siteId) {
+    return this.request.json('GET', `servers/${serverId}/sites/${siteId}/certificates`, null, ({ certificates }) => certificates.map(data => new Certificate(data)));
+  }
+
+  certificate(serverId, siteId, certificateId) {
+    return this.request.json('GET', `servers/${serverId}/sites/${siteId}/certificates/${certificateId}`, null, ({ certificate }) => new Certificate(certificate));
+  }
+
+  createCertificate(serverId, siteId, data) {
+    return this.request.json('POST', `servers/${serverId}/sites/${siteId}/certificates`, data, ({ certificate }) => new Certificate(certificate));
+  }
+
+  deleteCertificate(serverId, siteId, certificateId) {
+    return this.request.base('DELETE', `servers/${serverId}/sites/${siteId}/certificates/${certificateId}`);
+  }
+
+  getCertificateSigningRequest(serverId, siteId, certificateId) {
+    return this.request.base('GET', `servers/${serverId}/sites/${siteId}/certificates/${certificateId}/csr`);
+  }
+
+  installCertificate(serverId, siteId, certificateId) {
+    return this.request.base('POST', `servers/${serverId}/sites/${siteId}/certificates/${certificateId}/install`, data);
+  }
+
+  activateCertificate(serverId, siteId, certificateId) {
+    return this.request.base('POST', `servers/${serverId}/sites/${siteId}/certificates/${certificateId}/activate`);
+  }
+
+  obtainLetsEncryptCertificate(serverId, siteId, data) {
+    return this.request.json('POST', `servers/${serverId}/sites/${siteId}/certificates/letsencrypt`, data, ({ certificate }) => new Certificate(certificate));
   }
 
 }
