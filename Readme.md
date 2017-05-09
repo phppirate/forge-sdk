@@ -173,4 +173,4 @@ forge.updateMysqlUser(serverId, userId, data)
 forge.deleteMysqlUser(serverId, userId)
 ```
 
-## Contrubutions are welcome.
+## Contributions are welcome.
